@@ -72,7 +72,6 @@ public class MetaclassClient<T> {
 
 		// Create a new RestTemplate instance
 		RestTemplate restTemplate = new RestTemplate();
-
 		// Make the HTTP GET request to the Basic Auth protected URL
 		return restTemplate.exchange(url, HttpMethod.GET, requestEntity, c).getBody();
 	}
