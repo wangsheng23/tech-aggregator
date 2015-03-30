@@ -9,7 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
-import com.wsheng.aggregator.spring.mvcrest.util.CommonsUtil;
+import com.wsheng.aggregator.util.CommonsUtil;
 
 
 public class MetaclassClient<T> {

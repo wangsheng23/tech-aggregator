@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.wsheng.aggregator.spring.mvcrest.util;
+package com.wsheng.aggregator.util;
 
 import java.io.File;
 import java.io.FileInputStream;
