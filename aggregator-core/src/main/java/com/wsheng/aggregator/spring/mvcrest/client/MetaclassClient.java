@@ -9,7 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
-import com.wsheng.aggregator.spring.mvcrest.util.CommonsUtil;
+import com.wsheng.aggregator.util.CommonsUtil;
 
 
 public class MetaclassClient<T> {
@@ -72,7 +72,6 @@ public class MetaclassClient<T> {
 
 		// Create a new RestTemplate instance
 		RestTemplate restTemplate = new RestTemplate();
-
 		// Make the HTTP GET request to the Basic Auth protected URL
 		return restTemplate.exchange(url, HttpMethod.GET, requestEntity, c).getBody();
 	}

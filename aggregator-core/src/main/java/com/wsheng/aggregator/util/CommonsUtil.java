@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.wsheng.aggregator.spring.mvcrest.util;
+package com.wsheng.aggregator.util;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
