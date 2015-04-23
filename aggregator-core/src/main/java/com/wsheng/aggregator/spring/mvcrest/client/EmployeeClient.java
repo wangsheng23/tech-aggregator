@@ -54,7 +54,7 @@ public class EmployeeClient {
 
 		HttpEntity<Map<String, String>> entity = new HttpEntity<Map<String, String>>(map, headers);
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.exchange(url, HttpMethod.PUT, entity, null);
+		restTemplate.exchange(url, HttpMethod.PUT, entity, String.class);
 		return true;
 	}
 
