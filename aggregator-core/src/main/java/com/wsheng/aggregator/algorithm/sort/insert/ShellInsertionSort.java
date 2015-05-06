@@ -30,7 +30,7 @@ public class ShellInsertionSort {
 		int arraysize = 5;
 		double[] sorted = new double[arraysize];
 		System.out.println(" ------- Before Sort --------");
-		for (int j=1; j < arraysize; j++) {
+		for (int j=0; j < arraysize; j++) {
 			sorted[j] = random.nextDouble()*100;
 			System.out.print(sorted[j] + " ");
 		}
@@ -40,7 +40,7 @@ public class ShellInsertionSort {
 		insertionSort.sort(sorted);
 		
 		System.out.println(" ------- After Sort ---------");
-		for(int j=1; j < arraysize; j++) {
+		for(int j=0; j < arraysize; j++) {
 			System.out.print(sorted[j] + " ");
 		}
 		System.out.println();
@@ -63,7 +63,7 @@ public class ShellInsertionSort {
 		for (int j = inc+1; j < sortedLen; j++) {
 			if (sorted[j] < sorted[j-1]) {
 				sorted[0] = sorted[j];// 先保存该元素, 找到插入位置后进行恢复插入。
-			//	sorted[j] = sorted[j-1];// 前面的那个后移, 有没有这句话都不影响排序结果，因为现在是增量的（inc)排序，而不是直接和前一个元素比较。
+			//	sorted[j] = sorted[j-1];// 前面的那个后移, 有没有这句话都不影响排序结果，因为现在是增量的(inc)排序，而不是直接和前一个元素比较。
 				
 				// 寻找插入位置
 				int insertPos = j; // j = inc+1， 默认从增量后的位置开始插入:inc+1
@@ -78,7 +78,7 @@ public class ShellInsertionSort {
 						break;
 					}
 				}
-					sorted[insertPos] = sorted[0];
+				sorted[insertPos] = sorted[0];
 			}
 		}
 	}

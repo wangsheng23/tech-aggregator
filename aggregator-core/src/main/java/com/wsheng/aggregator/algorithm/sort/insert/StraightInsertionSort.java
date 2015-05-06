@@ -34,7 +34,7 @@ public class StraightInsertionSort {
 				sorted[0] = sorted[j];// 先保存该元素，找到插入位置后，进行恢复插入。
 				sorted[j] = sorted[j-1]; // 前面的那个后移
 				
-				// 寻找插入位置
+				// 寻找插入位置, 在第0个位置到第j-2个位置之间的这一堆元素之间进行排序并寻找合适的插入位置
 				int insertPos = 0;// 默认在第0个位置
 				for (int k = j-2; k >=0; k--) { // j从第二个位置开始，因此当前插入位置k从j-2的位置开始。
 					if (sorted[k] > sorted[0]) { // 如果当前位置还是比哨兵大，则显然不是插入位置，需要继续后移
