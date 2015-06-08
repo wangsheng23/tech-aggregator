@@ -1,0 +1,97 @@
+How to call the SearchController
+
+
+Get:
+1. for Pathvariable String format: Note: Pathvariable is not PathParam
+@RequestMapping(method=RequestMethod.GET, value="/test/{test}", 
+	consumes=Constants.APPLICATION_JSON_UTF8, produces=Constants.APPLICATION_JSON_UTF8)
+
+http://localhost:8080/mysearch/test/123
+Content-Type:application/json
+Accespt:application/json
+
+2. for RequestParam:
+@RequestMapping(method=RequestMethod.GET, value="/test", 
+	consumes=Constants.APPLICATION_JSON_UTF8, produces=Constants.APPLICATION_JSON_UTF8)
+
+
+http://localhost:8080/mysearch/test?test=123
+Content-Type:application/json
+Accespt:application/json
+
+Post:
+@RequestMapping(method=RequestMethod.POST, value="/add/spacemessage", consumes=Constants.APPLICATION_JSON_UTF8, produces=Constants.APPLICATION_JSON_UTF8)
+	@ResponseBody
+	public CommonResponseVO<UpdateResponse> addSpaceMessageDoc(@RequestBody SpaceMessageVO spaceMessage) {
+
+
+http://localhost:8080/mysearch/add/spacemessage
+Content-Type:application/json
+Accespt:application/json
+
+在下面的raw选项中选择JSON类型并输入：// id is mid for spacemessage
+{
+id:123456,
+uid:123,
+cid:456
+
+}
+
+如下的请求将转换为List<LinkedHashMap>的方式：
+
+http://localhost:8080/mysearch/add/spacemessage
+Content-Type:application/json
+Accespt:application/json
+
+在下面的raw选项中选择JSON类型并输入：
+[
+{
+name:"test",
+values:[
+"123",
+"456"
+],
+highlight:true,
+fieldType:Date_Range
+
+},
+{
+name:"test",
+values:[
+"1234",
+"4567"
+],
+highlight:true,
+fieldType:Normal
+
+}
+]
+
+public CommonResponseVO<QueryResponse> advanceQuery(@RequestBody List<LinkedTreeMap<String, Object>> queryFields) {
+		for (LinkedTreeMap<String, Object> fields : queryFields) {
+			for (Map.Entry<String, Object> entry : fields.entrySet()) {
+				System.out.println(entry.getKey() + " : " + entry.getValue());
+			}
+		}
+		return null;
+		// return new CommonResponseVO<QueryResponse>(solrActionProxy.query(queryFields, -1, -1));
+	}
+
+
+Post: RequestBody
+In order to enable com.chuanliu.platform.activity.basic.util.gson.GsonHttpMessageConverter,
+user have to use Expose annotation in the SearcherVO to consume the expect value:
+@RequestBody SearcherVO vo 
+
+Post Man:
+{
+ 
+  text:"圈子"
+  
+}
+
+//============== for production==================
+// String actionUrl = "https://diandi.im/solr/" + core.name().toLowerCase();
+https://diandi.im/solr/#/circle : 端口映射 44
+
+
