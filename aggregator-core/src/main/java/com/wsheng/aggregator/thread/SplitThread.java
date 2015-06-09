@@ -32,7 +32,7 @@ public class SplitThread {
 	 * 2: 6, 7, 8     part*i, part*(i + 1)
 	 * 
 	 */
-	private static void solution1() {
+	private static void solution1() { 
 		int total = 201; // there are 201's requests
 		int part = 100; // there will create 100 threads.
 		int eachNumberOfPart = 0;// eachPart means the number that every thread handled.
