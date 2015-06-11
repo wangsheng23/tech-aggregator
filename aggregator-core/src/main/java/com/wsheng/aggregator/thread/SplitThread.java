@@ -53,10 +53,8 @@ public class SplitThread {
 			for (int k = eachNumberOfPart*i; k < eachNumberOfPart*(i+1); k ++) {
 				System.out.print(strings[k] + " ");
 			}
-			
 			System.out.println("------ End Part: " + i);
 		}
-	
 	}
 	
 	
