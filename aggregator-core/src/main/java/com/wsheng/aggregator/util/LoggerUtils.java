@@ -51,5 +51,5 @@ public class LoggerUtils {
 	public static void highlight(Logger Logger, String message) {
 		Logger.info(Logger_FLAG_HIGHLIGHT + message + Logger_FLAG_HIGHLIGHT);
 	}
-
+	
 }
