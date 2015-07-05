@@ -6,7 +6,7 @@ package com.wsheng.aggregator.enums;
 /**
  * @author Josh Wang(Sheng)
  * 
- * @email  swang6@ebay.com
+ * @email  josh_wang23@hotmail.com
  * 
  */
 public enum NetworkAddressType {

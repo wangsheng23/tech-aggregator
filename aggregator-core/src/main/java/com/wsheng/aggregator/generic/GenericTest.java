@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
  * 
  * @author Josh Wang(Sheng)
  * 
- * @email  swang6@ebay.com
+ * @email  josh_wang23@hotmail.com
  * 
  */
 public class GenericTest<T> {

@@ -9,7 +9,7 @@ import java.util.Stack;
  * 8 种字符串反转的方法, 其实可以是9种方法，第9种是使用StringBuffer和StringBuilder中实现的方法
  * @author Josh Wang(Sheng)
  * 
- * @email  swang6@ebay.com
+ * @email  josh_wang23@hotmail.com
  * 
  */
 public class StringReverse {
