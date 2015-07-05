@@ -39,11 +39,44 @@
 		<version>2.1</version>
 	</dependency>
 	
+	<!-- 
+	There is a story, for this CMS query:
+	NucleonVersions[@status = \"normal\" and @seq > 2]{@softwareVersion, @seq}
+	
+	in Jersey 1.17.1, in queryParam() method of UriBuilderImpl, about 471 line, it will call 
+	Jersey own encode() method and the space between  @softwareVersion, @seq will be encoded +@seq
+	
+	But
+	in Jersey 1.18.1, also in queryParam() method of UriBuilderImpl, about 479 line,
+	the space won't be encoded to +, and it will throw an query exception in CMS engine to say
+	there is an incorrect character.
+	
+	 -->
 	<dependency>
 		<groupId>com.sun.jersey</groupId>
 		<artifactId>jersey-client</artifactId>
 		<version>1.18.1</version>
 	</dependency>
+	
+	 <!-- FreeMarker related -->
+	<dependency>
+         <groupId>org.freemarker</groupId>
+         <artifactId>freemarker</artifactId>
+         <version>2.3.22</version>
+    </dependency>
+    
+    <!-- Mail related -->
+		<dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.4</version>
+<!--             <exclusions> -->
+<!--                 <exclusion> -->
+<!--                     <groupId>javax.mail</groupId> -->
+<!--                     <artifactId>mail</artifactId> -->
+<!--                 </exclusion> -->
+<!--             </exclusions> -->
+        </dependency>
     
   </dependencies>
 </project>

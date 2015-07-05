@@ -49,7 +49,7 @@ public class MyLock {
 		int flag;
 		@Override
 		public void run() {
-			while (flag<10) {
+			while (flag < 10) {
 //				synchronized (MyLock.this) {
 //					System.out.println("j++=" + j--);
 //				}

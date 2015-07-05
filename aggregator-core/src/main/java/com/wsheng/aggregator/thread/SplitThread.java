@@ -54,7 +54,7 @@ public class SplitThread {
 				System.out.print(strings[k] + " ");
 			}
 			System.out.println("------ End Part: " + i);
-		}
+		} 
 	}
 	
 	
