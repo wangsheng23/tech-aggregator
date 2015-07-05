@@ -4,7 +4,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;  
 import java.sql.SQLException;  
 import java.sql.Statement;  
-  
+
+/**
+ * 
+ * @author Josh Wang(Sheng)
+ * 
+ * @email  josh_wang23@hotmail.com
+ *
+ */
 public class CRUD {  
   
     public static void main(String[] args) throws SQLException {  

@@ -11,7 +11,7 @@ import java.io.IOException;
  * 将一个文件的内容写入另一个文件(按行来写)
  * @author Josh Wang(Sheng)
  * 
- * @email  swang6@ebay.com
+ * @email  josh_wang23@hotmail.com
  *
  */
 public class FileTest {

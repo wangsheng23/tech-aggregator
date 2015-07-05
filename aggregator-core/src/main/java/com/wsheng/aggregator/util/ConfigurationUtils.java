@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
  * And settings.properties comes from local/pre-prod/qa/prod.properties
  * 
  * @author Josh Wang(Sheng)
- * @email  swang6@ebay.com
+ * @email  josh_wang23@hotmail.com
  */
 public class ConfigurationUtils {
 

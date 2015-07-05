@@ -9,6 +9,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+/**
+ * @author Josh Wang(Sheng)
+ * 
+ * @email  joshwang_23@hotmail.com
+ * 
+ */
 public class ReadFromFile {
     /**
      * 以字节为单位读取文件，常用于读二进制文件，如图片、声音、影像等文件。

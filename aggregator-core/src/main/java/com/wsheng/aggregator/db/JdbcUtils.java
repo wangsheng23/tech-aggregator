@@ -5,7 +5,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;  
 import java.sql.SQLException;  
 import java.sql.Statement;  
-  
+
+/**
+ * 
+ * @author Josh Wang(Sheng)
+ * 
+ * @email  josh_wang23@hotmail.com
+ *
+ */
 public class JdbcUtils {  
 	private static String url = "jdbc:mysql://localhost:3306/jdbc";
 	private static String user = "root";

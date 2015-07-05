@@ -7,7 +7,7 @@ package com.wsheng.aggregator.bean;
 /**
  * @author Josh Wang(Sheng)
  * 
- * @email  swang6@ebay.com
+ * @email  josh_wang23@hotmail.com
  * 
  */
 public class LBSource extends SyncSource {

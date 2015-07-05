@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  * 
  * @author Josh Wang(Sheng)
  * 
- * @email  swang6@ebay.com
+ * @email  josh_wang23@hotmail.com
  * 
  */
 public class JDKLogging {

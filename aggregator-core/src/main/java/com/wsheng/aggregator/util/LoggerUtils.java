@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
  * used to highlight the important log with the log level if needed
  * @author Josh Wang(Sheng)
  * 
- * @email  swang6@ebay.com
+ * @email  josh_wang23@hotmail.com
  *
  */
 public class LoggerUtils {

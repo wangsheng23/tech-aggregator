@@ -6,7 +6,7 @@ import javax.net.ssl.X509TrustManager;
  * This code used to call https webservice, its only need to init once in the application
  * @author Josh Wang(Sheng)
  * 
- * @email  swang6@ebay.com
+ * @email  josh_wang23@hotmail.com
  *
  */
 public class EasyTrustManager implements X509TrustManager{

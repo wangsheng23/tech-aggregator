@@ -8,7 +8,7 @@ import java.util.Stack;
 /**
  * @author Josh Wang(Sheng)
  * 
- * @email  swang6@ebay.com
+ * @email  josh_wang23@hotmail.com
  * 
  */
 public class TestStack {
