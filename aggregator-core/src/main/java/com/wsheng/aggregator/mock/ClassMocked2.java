@@ -12,6 +12,7 @@ package com.wsheng.aggregator.mock;
 public class ClassMocked2 {
 
 	public static int getDouble(int i) {
+		System.out.println("================");
         return i*2;
 	}
 	

@@ -43,6 +43,9 @@ public class FreeMarkerUtils {
 //				templatePath = websrc.getPath() + classPathPrefix;
 //			}
 			
+			// 或者使用这个
+			// InputStream is = FreeMarkerUtils.class.getClassLoader().getResourceAsStream("***.properties");
+			
 			
 			cfg.setDirectoryForTemplateLoading(new File(templatePath));
 			
