@@ -19,7 +19,7 @@ import com.wsheng.aggregator.util.FreeMarkerUtils;
  * 
  * @author Josh Wang(Sheng)
  * 
- * @email  swang6@ebay.com
+ * @email  josh_wang23@hotmail.com
  *
  */
 public class TestEmailUtil {
@@ -51,9 +51,9 @@ public class TestEmailUtil {
 		// contents.put(MailConstants.HAS_SIGNATURE, false);
 		
 		String title = "Test-DBMetrics";
-		// String receivers = "swang6@ebay.com^_^wangsheng23@126.com";
-		String receivers = "swang6@ebay.com";
-		String sender = "swang6@ebay.com";
+		// String receivers = "josh_wang23@hotmail.com^_^wangsheng23@126.com";
+		String receivers = "josh_wang23@hotmail.com";
+		String sender = "josh_wang23@hotmail.com";
 		
 		String contentStr = FreeMarkerUtils.getDBMetricsMailContent(contents);
 //		int i = 0;

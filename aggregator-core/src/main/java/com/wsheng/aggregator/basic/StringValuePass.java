@@ -7,7 +7,7 @@ package com.wsheng.aggregator.basic;
  * String is special, str = str + "2" will create a new String 
  * @author Josh Wang(Sheng)
  * 
- * @email  swang6@ebay.com
+ * @email  josh_wang23@hotmail.com
  * 
  */
 public class StringValuePass {
