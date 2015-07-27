@@ -32,8 +32,9 @@ public class PowerMockMethodInternalTest {
 			// when calling PowerMockito.whenNew(), The Class of @PrepareForTest is the class which
 			// used to new the Object
 			File file = mock(File.class);
+			
 			PowerMockTarget target = new PowerMockTarget();
-			whenNew(File.class).withArguments("joshwang").thenReturn(file);
+			whenNew(File.class).withArguments("joshwang").thenReturn(file); // want to create a new File
 			when(file.exists()).thenReturn(true);
 			
 			Assert.assertTrue(target.callInternalInstance("joshwang"));

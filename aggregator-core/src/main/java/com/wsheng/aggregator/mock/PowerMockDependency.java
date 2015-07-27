@@ -3,6 +3,7 @@
  */
 package com.wsheng.aggregator.mock;
 
+
 /**
  * 
  * just like nucleonutils
@@ -23,5 +24,5 @@ public class PowerMockDependency {
 		System.out.println(" Hehe... I am mocking a static method");
 		return false;
 	}
-
+	
 }

@@ -18,11 +18,11 @@ public class DateTransformer  {
         return DateTransformer.getTime(new Date(targetTime), formatter);  
     }  
          
-    public static String getTime(Date date, DateFormat formatter){  
+    public static String getTime(Date date, DateFormat formatter) {  
        return formatter.format(date);  
     }  
          
-    public static void main(String[] args){  
+    public static void main(String[] args) {  
         DateFormat formatter = new SimpleDateFormat(DATE_FORMAT);  
         Date date = Calendar.getInstance().getTime();  
         System.out.println(" date: " + date);

@@ -25,7 +25,7 @@ public class PowerMockPrivateMethodTest {
 	@PrepareForTest(PowerMockTarget.class)
 	public void callPrivateMethod() throws Exception {
 		// ============== Note : Its required that to add @RunWith and @PrepareForTest(both for Type and Method)
-		// when mock static method, The Class of @PrepareForTest is the class which contain private method
+		// when mock static method, The Class of @PrepareForTest is the class which contain private method.
 
 		PowerMockTarget target = mock(PowerMockTarget.class);
 		when(target.callPrivateMethod()).thenCallRealMethod();

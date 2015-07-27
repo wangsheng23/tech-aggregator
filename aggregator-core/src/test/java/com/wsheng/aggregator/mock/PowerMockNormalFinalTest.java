@@ -26,7 +26,7 @@ public class PowerMockNormalFinalTest {
 	@PrepareForTest(PowerMockDependency.class)
 	public void callFinalMethod() {
 		// ============== Note : Its required that to add @RunWith and @PrepareForTest(both for Type and Method)
-		// when mock final method, The Class of @PrepareForTest is the class which contain final method
+		// when mock final method, The Class of @PrepareForTest is the class which contain final method.
 		PowerMockDependency dependency = mock(PowerMockDependency.class);
 		PowerMockTarget target = new PowerMockTarget();
 		when(dependency.isAlive()).thenReturn(true);

@@ -28,7 +28,6 @@ public class PowerMockNormalTest {
 	@Test
 	public void callArgumentInstance() {
 		// ============== Note : The normal mock doesn't need @RunWith and @PrepareForTest
-		// so please comment @RunWith(PowerMockRunner.class)
 		File file = mock(File.class); // construct File object
 		
 		PowerMockTarget target = new PowerMockTarget();

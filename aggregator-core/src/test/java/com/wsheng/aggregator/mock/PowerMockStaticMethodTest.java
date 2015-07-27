@@ -21,8 +21,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @RunWith(PowerMockRunner.class)
 public class PowerMockStaticMethodTest {
 	
-	// 4. mock static method
-	@Test
+	// 4. mock the normal static method
+	/*@Test
 	@PrepareForTest(PowerMockDependency.class)
 	public void callStaticMethod() {
 		// ============== Note : Its required that to add @RunWith and @PrepareForTest(both for Type and Method)
@@ -32,6 +32,15 @@ public class PowerMockStaticMethodTest {
 		mockStatic(PowerMockDependency.class);
 		when(PowerMockDependency.isExist()).thenReturn(true);
 		Assert.assertTrue(target.callStaticMethod());
+		PowerMockDependency.isExist();
+	}*/
+	
+	@Test
+	@PrepareForTest(PowerMockTarget.class)
+	public void callSeflStaticMethod() {
+		mockStatic(PowerMockTarget.class);
+		when(PowerMockTarget.identify("joshwang")).thenReturn(true);
+		Assert.assertTrue(PowerMockTarget.identify("joshwang"));
 	}
 
 }
