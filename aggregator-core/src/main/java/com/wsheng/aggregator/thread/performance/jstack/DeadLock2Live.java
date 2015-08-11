@@ -1,4 +1,4 @@
-package com.wsheng.aggregator.thread.performance;
+package com.wsheng.aggregator.thread.performance.jstack;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -50,6 +50,6 @@ public class DeadLock2Live {
         t1.start();  
         t2.start();  
     
-}
+    }
         
 }  

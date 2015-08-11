@@ -1,4 +1,4 @@
-package com.wsheng.aggregator.thread.performance;
+package com.wsheng.aggregator.thread.performance.jmap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -56,11 +56,5 @@ public class HashMapDeadLock implements Callable<Integer> {
 		} finally {
 			threadPool.shutdown();
 		}
-	
-		
-		
-		
 	}
-
-	
 }
