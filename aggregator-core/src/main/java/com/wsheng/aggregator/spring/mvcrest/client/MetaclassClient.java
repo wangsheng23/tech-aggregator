@@ -9,7 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
-import com.wsheng.aggregator.util.CommonsUtil;
+import com.wsheng.aggregator.util.CommonUtils;
 
 
 public class MetaclassClient<T> {
@@ -27,7 +27,7 @@ public class MetaclassClient<T> {
 		url = preUrl + url;
 		HttpHeaders requestHeaders = new HttpHeaders();
 		List<MediaType> mediaTypes = new ArrayList<MediaType>();
-		mediaTypes.add(CommonsUtil.converDataType(dataType));
+		mediaTypes.add(CommonUtils.converDataType(dataType));
 		requestHeaders.setAccept(mediaTypes);
 		HttpEntity<T> requestEntity = new HttpEntity<T>(item, requestHeaders);
 
@@ -46,7 +46,7 @@ public class MetaclassClient<T> {
 		url = preUrl + url;
 		HttpHeaders headers = new HttpHeaders();
 		List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
-		acceptableMediaTypes.add(CommonsUtil.converDataType(dataType));
+		acceptableMediaTypes.add(CommonUtils.converDataType(dataType));
 		headers.setAccept(acceptableMediaTypes);
 
 		HttpEntity<T> entity = new HttpEntity<T>(item, headers);
@@ -66,7 +66,7 @@ public class MetaclassClient<T> {
 		url = preUrl + url + id;
 		HttpHeaders requestHeaders = new HttpHeaders();
 		List<MediaType> mediaTypes = new ArrayList<MediaType>();
-		mediaTypes.add(CommonsUtil.converDataType(dataType));
+		mediaTypes.add(CommonUtils.converDataType(dataType));
 		requestHeaders.setAccept(mediaTypes);
 		HttpEntity<T> requestEntity = new HttpEntity<T>(requestHeaders);
 
