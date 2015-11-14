@@ -46,8 +46,8 @@ public class SolrQueryField<T extends Serializable> {
 	/** The field type is Common by default*/
 	private SolrQueryFieldType fieldType = SolrQueryFieldType.Common;
 	
-	/** The field operator is OR by default*/
-	private SolrQueryFieldOperator fieldOperator = SolrQueryFieldOperator.OR; 
+	/** The field value operator is OR by default, the values of the field will be connected by it*/
+	private SolrQueryFieldOperator fieldValueOperator = SolrQueryFieldOperator.OR; 
 	
 	public final static String 			DELIMETER_COLON 	= ":";
 	public final static String		 	DELIMETER_TO 		= "TO";
@@ -58,33 +58,33 @@ public class SolrQueryField<T extends Serializable> {
 	}
 	
 	public SolrQueryField(String fieldName, List<T> fieldValues, boolean facet, boolean highlight, boolean sort, ORDER sortType, 
-			SolrQueryFieldType fieldType, SolrQueryFieldOperator fieldOperator) {
+			SolrQueryFieldType fieldType, SolrQueryFieldOperator fieldValueOperator) {
 		super();
-		this.fieldName 		= fieldName;
-		this.fieldValues 	= fieldValues;
-		this.facet 			= facet;
-		this.highlight 		= highlight;   
-		this.sort 			= sort;
-		this.sortType 		= sortType;
-		this.fieldType 		= fieldType;
-		this.fieldOperator 	= fieldOperator;
+		this.fieldName 				= fieldName;
+		this.fieldValues 			= fieldValues;
+		this.facet 					= facet;
+		this.highlight 				= highlight;   
+		this.sort 					= sort;
+		this.sortType 				= sortType;
+		this.fieldType 				= fieldType;
+		this.fieldValueOperator 	= fieldValueOperator;
 	}
 	
 	public SolrQueryField(String fieldName, T value, boolean facet, boolean highlight, boolean sort, ORDER sortType, 
-			SolrQueryFieldType fieldType, SolrQueryFieldOperator fieldOperator) {
+			SolrQueryFieldType fieldType, SolrQueryFieldOperator fieldValueOperator) {
 		super();
-		this.fieldName 		= fieldName;
-		this.facet 			= facet;
+		this.fieldName 				= fieldName;
+		this.facet 					= facet;
 		
-		List<T> values 		= new ArrayList<T>();
+		List<T> values 				= new ArrayList<T>();
 		values.add(value);
-		this.fieldValues 	= values;
+		this.fieldValues 			= values;
 		
-		this.highlight 		= highlight;
-		this.sort 			= sort;
-		this.sortType 		= sortType;
-		this.fieldType 		= fieldType;
-		this.fieldOperator 	= fieldOperator;
+		this.highlight 				= highlight;
+		this.sort 					= sort;
+		this.sortType 				= sortType;
+		this.fieldType 				= fieldType;
+		this.fieldValueOperator 	= fieldValueOperator;
 	}
 	
 	public enum SolrQueryFieldType {
@@ -153,12 +153,14 @@ public class SolrQueryField<T extends Serializable> {
 		this.fieldType = fieldType;
 	}
 
-	public SolrQueryFieldOperator getFieldOperator() {
-		return fieldOperator;
+	public SolrQueryFieldOperator getFieldValueOperator() {
+		return fieldValueOperator;
 	}
 
-	public void setFieldOperator(SolrQueryFieldOperator fieldOperator) {
-		this.fieldOperator = fieldOperator;
+	public void setFieldValueOperator(SolrQueryFieldOperator fieldValueOperator) {
+		this.fieldValueOperator = fieldValueOperator;
 	}
+
+	
 
 }

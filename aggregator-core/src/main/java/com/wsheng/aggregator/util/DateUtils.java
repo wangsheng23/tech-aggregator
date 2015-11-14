@@ -15,9 +15,12 @@ import org.apache.commons.lang.StringUtils;
  */
 public class DateUtils {
 
-    public static final String MIDDLE_LINE_TIMESTAMP = "yyyy-MM-dd HH:mm:ss";
-    private static final long ONE_DAY = 24 * 3600 * 1000L;
-    private static long current_time;
+    public static final String 	MIDDLE_LINE_TIMESTAMP 			= "yyyy-MM-dd HH:mm:ss";
+    public static final String  MIDDLE_LINE_TIME_ZONE_TIMESTAMP = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"; // Z : zone T: customized character, meaningless
+    
+    
+    private static final long 	ONE_DAY 			  = 24 * 3600 * 1000L;
+    private static long 		current_time;
 
     /**
      * Get the current time

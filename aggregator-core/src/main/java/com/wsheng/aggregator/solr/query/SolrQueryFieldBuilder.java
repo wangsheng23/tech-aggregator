@@ -44,7 +44,7 @@ public class SolrQueryFieldBuilder {
 				SolrQueryField<String> senderField = new SolrQueryField<String>();
 				senderField.setFieldName(SolrBizField.uid.name());
 				senderField.setFieldValues(buildMultipleValues(vo.getSender()));
-				senderField.setFieldOperator(SolrQueryFieldOperator.OR);
+				senderField.setFieldValueOperator(SolrQueryFieldOperator.OR);
 				senderField.setFieldType(SolrQueryFieldType.Common);
 				
 				fields.add(senderField);
@@ -55,7 +55,7 @@ public class SolrQueryFieldBuilder {
 				SolrQueryField<String> circleField = new SolrQueryField<String>();
 				circleField.setFieldName(SolrBizField.cid.name());
 				circleField.setFieldValues(buildMultipleValues(vo.getCid()));
-				circleField.setFieldOperator(SolrQueryFieldOperator.OR);
+				circleField.setFieldValueOperator(SolrQueryFieldOperator.OR);
 				circleField.setFieldType(SolrQueryFieldType.Common);
 				
 				fields.add(circleField);
@@ -66,13 +66,13 @@ public class SolrQueryFieldBuilder {
 				SolrQueryField<String> createTimeField = new SolrQueryField<String>();
 				createTimeField.setFieldName(SolrBizField.create_time.name());
 				createTimeField.setFieldValues(buildMultipleValues(vo.getTime()));
-				createTimeField.setFieldOperator(SolrQueryFieldOperator.OR);
+				createTimeField.setFieldValueOperator(SolrQueryFieldOperator.OR);
 				createTimeField.setFieldType(SolrQueryFieldType.Common);
 				
 				SolrQueryField<String> updateTimeField = new SolrQueryField<String>();
 				updateTimeField.setFieldName(SolrBizField.last_update_time.name());
 				updateTimeField.setFieldValues(buildMultipleValues(vo.getTime()));
-				updateTimeField.setFieldOperator(SolrQueryFieldOperator.OR);
+				updateTimeField.setFieldValueOperator(SolrQueryFieldOperator.OR);
 				updateTimeField.setFieldType(SolrQueryFieldType.Common);
 				
 				fields.add(createTimeField);
@@ -81,7 +81,7 @@ public class SolrQueryFieldBuilder {
 				SolrQueryField<String> startTimeField = new SolrQueryField<String>();
 				startTimeField.setFieldName(SolrBizField.start_time.name());
 				startTimeField.setFieldValues(buildMultipleValues(vo.getStartTime()));
-				startTimeField.setFieldOperator(SolrQueryFieldOperator.OR);
+				startTimeField.setFieldValueOperator(SolrQueryFieldOperator.OR);
 				startTimeField.setFieldType(SolrQueryFieldType.Date_Range);
 				
 				fields.add(startTimeField);
@@ -89,7 +89,7 @@ public class SolrQueryFieldBuilder {
 				SolrQueryField<String> endTimeField = new SolrQueryField<String>();
 				endTimeField.setFieldName(SolrBizField.end_time.name());
 				endTimeField.setFieldValues(buildMultipleValues(vo.getStartTime()));
-				endTimeField.setFieldOperator(SolrQueryFieldOperator.OR);
+				endTimeField.setFieldValueOperator(SolrQueryFieldOperator.OR);
 				endTimeField.setFieldType(SolrQueryFieldType.Date_Range);
 				
 				fields.add(endTimeField);
@@ -120,7 +120,7 @@ public class SolrQueryFieldBuilder {
 				SolrQueryField<String> uploaderField = new SolrQueryField<String>();
 				uploaderField.setFieldName(SolrBizField.uid.name());
 				uploaderField.setFieldValues(buildMultipleValues(vo.getUploader()));
-				uploaderField.setFieldOperator(SolrQueryFieldOperator.OR);
+				uploaderField.setFieldValueOperator(SolrQueryFieldOperator.OR);
 				uploaderField.setFieldType(SolrQueryFieldType.Common);
 				
 				fields.add(uploaderField);
@@ -131,7 +131,7 @@ public class SolrQueryFieldBuilder {
 				SolrQueryField<String> circleField = new SolrQueryField<String>();
 				circleField.setFieldName(SolrBizField.cid.name());
 				circleField.setFieldValues(buildMultipleValues(vo.getCid()));
-				circleField.setFieldOperator(SolrQueryFieldOperator.OR);
+				circleField.setFieldValueOperator(SolrQueryFieldOperator.OR);
 				circleField.setFieldType(SolrQueryFieldType.Common);
 				
 				fields.add(circleField);
@@ -142,13 +142,13 @@ public class SolrQueryFieldBuilder {
 				SolrQueryField<String> createTimeField = new SolrQueryField<String>();
 				createTimeField.setFieldName(SolrBizField.create_time.name());
 				createTimeField.setFieldValues(buildMultipleValues(vo.getTime()));
-				createTimeField.setFieldOperator(SolrQueryFieldOperator.OR);
+				createTimeField.setFieldValueOperator(SolrQueryFieldOperator.OR);
 				createTimeField.setFieldType(SolrQueryFieldType.Common);
 				
 				SolrQueryField<String> updateTimeField = new SolrQueryField<String>();
 				updateTimeField.setFieldName(SolrBizField.last_update_time.name());
 				updateTimeField.setFieldValues(buildMultipleValues(vo.getTime()));
-				updateTimeField.setFieldOperator(SolrQueryFieldOperator.OR);
+				updateTimeField.setFieldValueOperator(SolrQueryFieldOperator.OR);
 				updateTimeField.setFieldType(SolrQueryFieldType.Common);
 				
 				fields.add(createTimeField);
@@ -157,7 +157,7 @@ public class SolrQueryFieldBuilder {
 				SolrQueryField<String> startTimeField = new SolrQueryField<String>();
 				startTimeField.setFieldName(SolrBizField.start_time.name());
 				startTimeField.setFieldValues(buildMultipleValues(vo.getStartTime()));
-				startTimeField.setFieldOperator(SolrQueryFieldOperator.OR);
+				startTimeField.setFieldValueOperator(SolrQueryFieldOperator.OR);
 				startTimeField.setFieldType(SolrQueryFieldType.Date_Range);
 				
 				fields.add(startTimeField);
@@ -165,7 +165,7 @@ public class SolrQueryFieldBuilder {
 				SolrQueryField<String> endTimeField = new SolrQueryField<String>();
 				endTimeField.setFieldName(SolrBizField.end_time.name());
 				endTimeField.setFieldValues(buildMultipleValues(vo.getStartTime()));
-				endTimeField.setFieldOperator(SolrQueryFieldOperator.OR);
+				endTimeField.setFieldValueOperator(SolrQueryFieldOperator.OR);
 				endTimeField.setFieldType(SolrQueryFieldType.Date_Range);
 				
 				fields.add(endTimeField);

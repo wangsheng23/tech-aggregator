@@ -18,6 +18,7 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,7 @@ import org.junit.Test;
 import com.wsheng.aggregator.solr.bean.SolrBizField;
 import com.wsheng.aggregator.solr.bean.SolrCore;
 import com.wsheng.aggregator.solr.query.SolrQueryField;
+import com.wsheng.aggregator.solr.query.SolrQueryField.SolrQueryFieldOperator;
 import com.wsheng.aggregator.solr.query.SolrQueryField.SolrQueryFieldType;
 import com.wsheng.aggregator.util.DateUtils;
 import com.wsheng.aggregator.util.SolrUtils;
@@ -153,7 +155,7 @@ public class TestSolrActionProxy extends Assert   {
 		doc.addField("manu", "手机中的战斗机");
 		doc.addField("popularity", 9);
 		// doc.addField("weight", 1.2);
-		doc.addField(SolrBizField.last_update_time.name(), DateUtils.str2Date("2015-11-06 11:23:23", DateUtils.MIDDLE_LINE_TIMESTAMP));
+		doc.addField(SolrBizField.last_update_time.name(), DateUtils.str2Date("2015-11-06 11:13:23", DateUtils.MIDDLE_LINE_TIMESTAMP));
 		docs.add(doc);
 		
 		doc = new SolrInputDocument();
@@ -191,6 +193,7 @@ public class TestSolrActionProxy extends Assert   {
 	public void queryByManu() {
 		String query = "manu:手机";
 		// String query = "manu:红色";
+		query = "HTC2014年手机最新力作，音乐功能值得信赖, 用于测试排序";
 		SolrDocumentList docs = solrActionProxy.query(query).getResults();
 		System.out.println(docs.getNumFound());
 		for (int i = 0; i < docs.size(); i++) {
@@ -231,9 +234,34 @@ public class TestSolrActionProxy extends Assert   {
 		}
 	}
 	
+	// TODO : debug facet and highlight functions, Did not debug them this time
 	@Test
 	public void dateRangeQuery() {
+		List<SolrQueryField<?>> dateQueryFields = new ArrayList<SolrQueryField<?>>();
 		
+		List<String> dateValues1 = new ArrayList<String>();
+		// dateValues1.add("2015-11-06T03:13:23Z");
+		// dateValues1.add("2015-11-09T07:23:23Z");
+		dateValues1.add("");
+		dateValues1.add("");
+		
+		SolrQueryField<String> dateField = new SolrQueryField<String>(SolrBizField.last_update_time.name(), dateValues1, false, 
+				false, true, ORDER.desc, SolrQueryFieldType.Date_Range, SolrQueryField.SolrQueryFieldOperator.OR); 
+		
+		dateQueryFields.add(dateField);
+		
+		List<QueryResponse> responses = solrActionProxy.query(dateQueryFields, 3, SolrQueryField.SolrQueryFieldOperator.OR);
+		System.out.println(" === Start to print results ");
+		for (QueryResponse response : responses) {
+			SolrDocumentList docs = response.getResults();
+			System.out.println("results : " + docs);
+			
+			for (SolrDocument doc : docs) {
+				System.out.println(" doc : " + doc);
+			}
+		}
+		
+		System.out.println(" === End to print results ");
 	}
 	
 	@Test
@@ -245,23 +273,25 @@ public class TestSolrActionProxy extends Assert   {
 	public void commonQuery() {
 		List<SolrQueryField<?>> fields = new ArrayList<SolrQueryField<?>>();
 		
-		// The query will be parsed as: Nokia,Iphone5s,HTC. And this equals "Nokia OR Iphone5s OR　HTC"
+		// The query will be parsed as: Nokia Lumia 2000,Iphone6s,HTC. And this equals "Nokia Lumia 2000 OR Iphone6s OR　HTC"
 		List<String> values1 = new ArrayList<String>();
-		values1.add("Nokia");
-		values1.add("Iphone5s");
-		values1.add("HTC");
-		// values1.add("Nokia,Iphone5s,HTC");
-		// values1.add("Nokia OR Iphone5s OR　HTC");
+		values1.add("Nokia Lumia 2000");
+		values1.add("Iphone6s");
+		values1.add("HTC-TopOne");
+		// values1.add("Nokia Lumia 2000,Iphone6s,HTC");
+		// values1.add("Nokia Lumia 2000 OR Iphone6s OR　HTC");
 		
-		
+		// multiple fields(strings) can't be sorted.
 		// field1 is the second field - see below:fields.add(field1); facet, highlight, sort by name asc,
-		SolrQueryField<String> field1 = new SolrQueryField<String>("name", values1, true, 
-				true, true, ORDER.asc, SolrQueryFieldType.Common, SolrQueryField.SolrQueryFieldOperator.OR); 
+		SolrQueryField<String> field1 = new SolrQueryField<String>("name", values1, false, 
+				false, false, null, SolrQueryFieldType.Common, SolrQueryField.SolrQueryFieldOperator.OR); 
 		
 		// field2 is the third field - see below:fields.add(field2);  facet, no highlight, no sort
 		List<String> values2 = new ArrayList<String>();
-		values2.add("肉食动物");
-		SolrQueryField<String> field2 = new SolrQueryField<String>("manu", values2, true, false, false, null, 
+		values2.add("音乐功能");
+		values2.add("视频");
+		values2.add("土豪金");
+		SolrQueryField<String> field2 = new SolrQueryField<String>("manu", values2, false, false, true, ORDER.asc, 
 				SolrQueryFieldType.Common, SolrQueryField.SolrQueryFieldOperator.OR);
 		
 		
@@ -291,12 +321,26 @@ public class TestSolrActionProxy extends Assert   {
 				FieldType.Normal_Range, QueryField.FieldConnector.OR);
 	*/
 		
-		// fields.add(field4);
-		// fields.add(field1);
-		fields.add(field2);
-		fields.add(field3);
+		// date field
+		List<String> dateValues1 = new ArrayList<String>();
+		 dateValues1.add("2015-11-07T03:13:23Z");
+		 dateValues1.add("2015-11-09T07:23:23Z");
+		// dateValues1.add("");
+		// dateValues1.add("");
 		
-		List<QueryResponse> responses = solrActionProxy.query(fields);
+		 // will use the "manu" fields order as a high priority
+		SolrQueryField<String> dateField = new SolrQueryField<String>(SolrBizField.last_update_time.name(), dateValues1, false, 
+				false, true, ORDER.asc, SolrQueryFieldType.Date_Range, SolrQueryField.SolrQueryFieldOperator.OR); 
+		
+		// fields.add(field4);
+		fields.add(field1);
+		fields.add(field2);
+		//fields.add(field3);
+		fields.add(dateField);
+		
+		List<QueryResponse> responses = solrActionProxy.query(fields, 30, SolrQueryFieldOperator.AND);
+		
+		System.out.println(" === Start to print results ");
 		
 		for (QueryResponse response : responses) {
 			SolrDocumentList results = response.getResults();
@@ -310,7 +354,7 @@ public class TestSolrActionProxy extends Assert   {
 			System.out.println("======输出分片信息=======");
 			
 			// 输出分片信息
-			if (SolrUtils.getFacetField(response) != null) {
+			/*if (SolrUtils.getFacetField(response) != null) {
 				for (FacetField facet : SolrUtils.getFacetField(response)) {
 					System.out.println(" facet fieldName: " + facet.getName());
 					List<Count> facetCounts = facet.getValues();
@@ -318,11 +362,11 @@ public class TestSolrActionProxy extends Assert   {
 						System.out.println(count.getName() + " : " + count.getCount());
 					}
 				}
-			}
+			}*/
 			
 			
 			System.out.println("======输出高亮的field=======");
-			Map<String, Map<String, List<String>>> hResults = SolrUtils.getHighlighFields(response);
+			/*Map<String, Map<String, List<String>>> hResults = SolrUtils.getHighlighFields(response);
 			if (hResults != null) {
 				for (Map.Entry<String, Map<String, List<String>>> doc : hResults.entrySet()) {
 					System.out.println(" doc key(ID): " + doc.getKey() + " ---" + doc.getValue());
@@ -335,9 +379,10 @@ public class TestSolrActionProxy extends Assert   {
 					}
 					
 				} 
-			}
+			}*/
 		}
 		
+		System.out.println(" === End to print results ");
 		
 		
 		
@@ -416,6 +461,11 @@ public class TestSolrActionProxy extends Assert   {
 					+ " name: " + SolrUtils.getValue(document, SolrBizField.name.name()));
 		}
 	
+	}
+	
+	@After
+	public void clear() {
+		solrActionProxy.releaseResource();
 	}
 	
 

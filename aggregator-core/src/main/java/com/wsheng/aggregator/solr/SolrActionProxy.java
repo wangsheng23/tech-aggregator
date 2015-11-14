@@ -4,6 +4,8 @@
 package com.wsheng.aggregator.solr;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -21,7 +23,6 @@ import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.ModifiableSolrParams;
 
-import com.wsheng.aggregator.solr.bean.SolrConstants;
 import com.wsheng.aggregator.solr.bean.SolrCore;
 import com.wsheng.aggregator.solr.bean.SolrParam;
 import com.wsheng.aggregator.solr.query.SolrClientBuilder;
@@ -126,25 +127,24 @@ public class SolrActionProxy {
 	}
 
 	/**
-	 * AdvanceQuery
-	 * 
 	 * SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");  
-	   String time = "lastTime:["+sdf.format(new Date())+" TO "+sdf.format(new Date())+"]";
-	 *自定义高级查询Field, 可指定Field是否进行排序，是否高亮显示。
+	 * String time = "lastTime:["+sdf.format(new Date())+" TO "+sdf.format(new Date())+"]";
+	 * 自定义高级查询Field, 可指定Field是否进行排序，是否高亮显示。
 	 * 使用自定义分页查询来包装查询的Fields
 	 * 
-	 * @param List<SolrQueryField<?>> queryFields
-	 * @param core The target core for current action
+	 * @param queryFields
+	 * @param pageSize
+	 * @param fieldsOperator - the Operator between Fields: like Fields(name) A and Fields B(manu)
 	 * @return
 	 */
-	public List<QueryResponse> query(List<SolrQueryField<?>> queryFields) {
+	public List<QueryResponse> query(List<SolrQueryField<?>> queryFields, int pageSize, SolrQueryFieldOperator fieldsOperator) {
 		// the sort filed should be saved in the order map because of the sort function. can't be HashMap here
 		Map<String, ORDER> orderFields		= new LinkedHashMap<String, ORDER>();
 		
 		List<String> facetFields 	   		= new ArrayList<>();
 		List<String> highlightFields 		= new ArrayList<>();
 		
-		String queryStr = SolrQueryUtils.buildQuery(queryFields, SolrQueryFieldOperator.OR);
+		String queryStr = SolrQueryUtils.buildQuery(queryFields, fieldsOperator);
 		
 		for (SolrQueryField<?> field : queryFields) {
 			if (field.isSort())
@@ -179,7 +179,9 @@ public class SolrActionProxy {
 	        }
 		}
 		
-		return paginationQuery(query, SolrConstants.PAGE_SIZE);
+		logQuery(query);
+	
+		return paginationQuery(query, pageSize);
 		
 	}
 	
@@ -270,7 +272,17 @@ public class SolrActionProxy {
 			if (needCommit)
 				solrClient.commit();
 		} catch (SolrServerException | IOException e) {
-			LoggerUtils.error(logger, "Remove docs failed "  + ExceptionUtils.getStackTraceMsg(e));
+			LoggerUtils.error(logger, "Remove docs failed : "  + ExceptionUtils.getStackTraceMsg(e));
+		}
+	}
+	
+	public void releaseResource() {
+		if (solrClient != null) {
+			try {
+				solrClient.close();
+			} catch (IOException e) {
+				LoggerUtils.error(logger, "Close Solr Client failed : "  + ExceptionUtils.getStackTraceMsg(e));
+			}
 		}
 	}
 	
@@ -280,6 +292,7 @@ public class SolrActionProxy {
 		SolrQueryPagination page = new SolrQueryPagination(pageSize);
 		
 		boolean quit = false;
+		boolean needScroll = true;
 		do {
 			int start = page.getStart();
 			
@@ -307,9 +320,20 @@ public class SolrActionProxy {
 				LoggerUtils.error(logger, "Query docs by QueryFields failed "  + ExceptionUtils.getStackTraceMsg(e));
 			}
 			
-		} while (page.hasNext(true) || !quit);
+		} while (page.hasNext(needScroll) && !quit);
 		
 		return responses;
+	}
+	
+	private void logQuery(SolrQuery query) {
+		if (query != null) {
+			try {
+				LoggerUtils.info(logger, "Current Query : " + URLDecoder.decode(query.toString(), "UTF-8"));
+				System.out.println(" Current Query : " + URLDecoder.decode(query.toString(), "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				LoggerUtils.error(logger, "Query conents is so bad : "  + ExceptionUtils.getStackTraceMsg(e));
+			}	
+		}
 	}
 	
 }

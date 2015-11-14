@@ -4,6 +4,7 @@ package com.wsheng.aggregator.util;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.wsheng.aggregator.solr.query.SolrQueryField;
@@ -51,6 +52,7 @@ public class SolrQueryUtils {
 	public static <T extends Serializable> String buildQuery(SolrQueryField<T> queryField) {
 		if (queryField != null && queryField.getFieldValues() != null) {
 			StringBuffer queryBuilder = new StringBuffer();
+			
 			SolrQueryFieldType fieldType = queryField.getFieldType();
 			switch (fieldType) {
 			case Common:
@@ -67,7 +69,6 @@ public class SolrQueryUtils {
 				buildCommonQuery(queryField, queryBuilder);
 				break;
 			}
-			
 			return queryBuilder.toString();
 		}
 		
@@ -80,7 +81,7 @@ public class SolrQueryUtils {
 		if (fieldValues.size() >= 2) {
 			for (int i = 0; i < fieldValues.size() - 1; i++) {
 				queryBuilder.append(queryField.getFieldName() + ":" + fieldValues.get(i));
-				queryBuilder.append(" ").append(queryField.getFieldOperator().name()).append(" ");
+				queryBuilder.append(" ").append(queryField.getFieldValueOperator().name()).append(" ");
 			}
 			
 			// append the last field value
@@ -133,11 +134,12 @@ public class SolrQueryUtils {
 	private static void buildDateRangeQuery(SolrQueryField<?> queryField, StringBuffer queryBuilder) {
 		List<?> fieldValues = queryField.getFieldValues();
 		if (fieldValues.size() == 2) {
+			queryBuilder.append(queryField.getFieldName()).append(SolrQueryField.DELIMETER_COLON);
 			String date1 = fieldValues.get(0).toString(), 
 					date2 = fieldValues.get(1).toString();
 			
-			date1 = date1 == null ? "*" : date1;
-			date2 = date2 == null ? "*" : date2;
+			date1 = StringUtils.isEmpty(date1) ? "*" : date1;
+			date2 = StringUtils.isEmpty(date2) ? "*" : date2;
 			
 			queryBuilder.append("[").append(date1).append(" ").append(SolrQueryField.DELIMETER_TO).
 				append(" ").append(date2).append("]");
