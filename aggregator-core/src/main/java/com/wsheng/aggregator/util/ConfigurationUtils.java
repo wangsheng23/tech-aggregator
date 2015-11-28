@@ -55,4 +55,12 @@ public class ConfigurationUtils {
 		return props.getProperty("CMSDB_PACKAGE");
 	}
 	
+	/**
+	 * Get Solr Instance
+	 * @return
+	 */
+	public static String getSolrInstance() {
+		return props.getProperty("SOLR_INSTANCE");
+	}
+	
 }

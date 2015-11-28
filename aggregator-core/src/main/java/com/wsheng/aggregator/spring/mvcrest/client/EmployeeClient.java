@@ -10,7 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
-import com.wsheng.aggregator.util.CommonsUtil;
+import com.wsheng.aggregator.util.CommonUtils;
 
 
 public class EmployeeClient {
@@ -29,7 +29,7 @@ public class EmployeeClient {
 		url = preUrl + url;
 		HttpHeaders requestHeaders = new HttpHeaders();
 		List<MediaType> mediaTypes = new ArrayList<MediaType>();
-		mediaTypes.add(CommonsUtil.converDataType(dataType));
+		mediaTypes.add(CommonUtils.converDataType(dataType));
 		requestHeaders.setAccept(mediaTypes);
 		HttpEntity<Map<String, String>> requestEntity = new HttpEntity<Map<String, String>>(map, requestHeaders);
 		// Create a new RestTemplate instance
@@ -49,7 +49,7 @@ public class EmployeeClient {
 		url = preUrl + url;
 		HttpHeaders headers = new HttpHeaders();
 		List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
-		acceptableMediaTypes.add(CommonsUtil.converDataType(dataType));
+		acceptableMediaTypes.add(CommonUtils.converDataType(dataType));
 		headers.setAccept(acceptableMediaTypes);
 
 		HttpEntity<Map<String, String>> entity = new HttpEntity<Map<String, String>>(map, headers);
@@ -62,7 +62,7 @@ public class EmployeeClient {
 		url = preUrl + url + id;
 		HttpHeaders requestHeaders = new HttpHeaders();
 		List<MediaType> mediaTypes = new ArrayList<MediaType>();
-		mediaTypes.add(CommonsUtil.converDataType(dataType));
+		mediaTypes.add(CommonUtils.converDataType(dataType));
 		requestHeaders.setAccept(mediaTypes);
 		HttpEntity<String> requestEntity = new HttpEntity<String>(requestHeaders);
 		// Create a new RestTemplate instance

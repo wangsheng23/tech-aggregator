@@ -112,6 +112,106 @@
 		<artifactId>mysql-connector-java</artifactId>
 		<version>5.1.34</version>
 	</dependency>
+    <!-- SolrJ -->
+	<dependency>
+         <artifactId>solr-solrj</artifactId>
+         <groupId>org.apache.solr</groupId>
+         <version>5.3.1</version>
+         <type>jar</type>
+         <scope>compile</scope>
+         <exclusions>
+     		<exclusion>
+     			<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+     		</exclusion>
+         </exclusions>
+    </dependency>
+        
+    	<!-- if you need to use the EmbeddedSolrServer, you need to add the solr-core dependency too. -->
+   	<dependency>
+         <artifactId>solr-core</artifactId>
+         <groupId>org.apache.solr</groupId>
+         <version>5.3.1</version>
+         <type>jar</type>
+         <scope>compile</scope>
+    </dependency>
+    
+     <!-- Hibernate Integration -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-proxool</artifactId>
+            <version>${hibernate.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>proxool</groupId>
+                    <artifactId>proxool</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Hibernate c3p0 connection pool -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>proxool</groupId>
+            <artifactId>proxool-cglib</artifactId>
+            <version>${proxool.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>proxool</groupId>
+            <artifactId>proxool</artifactId>
+            <version>${proxool.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <!-- <version>4.2.4.Final</version> -->
+            <version>${hibernate.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Hibernate Integration -->
+
+        <!-- Mybatis Integration -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis.spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.miemiedev</groupId>
+            <artifactId>mybatis-callable</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.miemiedev</groupId>
+            <artifactId>mybatis-paginator</artifactId>
+            <version>1.2.10</version>
+        </dependency>
+
+
+        <!-- Mybatis Integration -->
     
   </dependencies>
 </project>
