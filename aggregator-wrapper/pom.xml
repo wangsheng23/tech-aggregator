@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+	http://maven.apache.org/xsd/maven-4.0.0.xsd" 
+	xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -17,6 +19,80 @@
     	<artifactId>aggregator-core</artifactId>
     	<version>1.0</version>
   	</dependency>
+  	
+  	<dependency>
+	    <groupId>org.eclipse.jetty</groupId>
+	    <artifactId>jetty-server</artifactId>
+	    <version>${jetty.version}</version>
+	    <exclusions>
+	    	<exclusion>
+	    		<groupId>javax.servlet</groupId>
+	    		<artifactId>javax.servlet-api</artifactId>
+	    	</exclusion>
+	    </exclusions>
+  	</dependency>
+  <dependency>
+	    <groupId>org.eclipse.jetty</groupId>
+	    <artifactId>jetty-servlet</artifactId>
+	    <version>${jetty.version}</version>
+  </dependency>
+  <dependency>
+	    <groupId>org.eclipse.jetty</groupId>
+	    <artifactId>jetty-webapp</artifactId>
+	    <version>${jetty.version}</version>
+  </dependency>
+  <dependency>
+	    <groupId>org.eclipse.jetty</groupId>
+	    <artifactId>jetty-servlets</artifactId>
+	    <version>${jetty.version}</version>
+  </dependency>
+  
+  <!-- JSP and JSTL SUPPORT, if throws no configured jsp exception
+  	   we can query the lib/jsp of the jetty to check which lib is missed in the dependency.
+   -->
+  <dependency>
+	<groupId>org.eclipse.jetty</groupId>
+	<artifactId>jetty-jsp</artifactId>
+	<version>${jetty.jsp.version}</version>
+	<exclusions>
+	    	<exclusion>
+	    		<groupId>javax.servlet</groupId>
+	    		<artifactId>javax.servlet-api</artifactId>
+	    	</exclusion>
+	    </exclusions>
+  </dependency>
+  <dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+    <scope>provided</scope>
+  </dependency>
+  <dependency>
+  	<groupId>org.eclipse.jetty.toolchain</groupId>
+  	<artifactId>jetty-jsp-jdt</artifactId>
+  	<version>2.3.3</version>
+  	<exclusions>
+	    	<exclusion>
+	    		<groupId>javax.servlet</groupId>
+	    		<artifactId>javax.servlet-api</artifactId>
+	    	</exclusion>
+	    </exclusions>
+  </dependency>
+<!--   <dependency> -->
+<!-- 	  <groupId>javax.servlet.jsp</groupId> -->
+<!-- 	  <artifactId>jsp-api</artifactId> -->
+<!-- 	  <version>2.1</version> -->
+<!--   </dependency> -->
+
+	<!--  This was moved to javax.servlet-api -->
+	<!-- <dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+		<version>3.0-alpha-1</version>
+	</dependency> -->
+		
+		 
+
   </dependencies>
   
   
@@ -28,6 +104,22 @@
 	          <artifactId>maven-war-plugin</artifactId>
 	          <version>2.6</version>
 	      </plugin>
+	      
+	  	<!-- <plugin>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-jspc-maven-plugin</artifactId>
+			<version>9.3.1-SNAPSHOT</version>
+			<executions>
+				<execution>
+					<id>jspc</id>
+					<goals>
+						<goal>jspc</goal>
+					</goals>
+					<configuration>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin> -->
     </plugins>
     
   </build>
