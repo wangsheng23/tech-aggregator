@@ -11,8 +11,19 @@
     http://www.springframework.org/schema/context/spring-context-3.0.xsd
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
-        
+     
+    <!-- Configures the @Controller programming model -->   
     <mvc:annotation-driven/>
+    
+    <!-- Forwards requests to the "/" resource to the "home" view -->
+	<mvc:view-controller path="/" view-name="index"/> 
+    
+    <mvc:resources mapping="/i/**" location="WEB-INF/images/" />
+	<mvc:resources mapping="/c/**" location="WEB-INF/css/" />
+	<mvc:resources mapping="/s/**" location="WEB-INF/scripts/" />
+	<mvc:resources mapping="/favicon.ico" 
+  		location="WEB-INF/images/favicon.ico" />
+    
     <context:component-scan base-package="com.wsheng.aggregator" />
     <bean id="marshallingConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
           <property name="supportedMediaTypes" value="application/xml"/>
@@ -40,6 +51,25 @@
            </list>
        </property>
      </bean>
+     
+     <!-- Resolve jsp's -->
+	<bean id="viewResolver" 
+	  class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+	    <property name="viewClass" 
+	      value="org.springframework.web.servlet.view.JstlView"/>
+	    <property name="prefix" value="/WEB-INF/views/"/>
+	    <property name="suffix" value=".jsp"/>
+	</bean>
+
+	<!-- i18n message source -->
+	<bean id="messageSource" 
+	  class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	  <!-- /WEB-INF/i18n/messages means there is a folder  i18n om WEB-INF and there should be 
+	  a properties file start with messages and append the locale like messages_zh_CN.properties -->
+	    <property name="basename" value="/WEB-INF/i18n/messages" />
+	    <property name="defaultEncoding" value="UTF-8"/>
+	    <property name="cacheSeconds" value="30" />
+	</bean>
 <!--      <bean id="internalResourceResolver" -->
 <!--         class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
 <!--         <property name="prefix" value="/" /> -->

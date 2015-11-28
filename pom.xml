@@ -15,10 +15,12 @@
       <slf4jVersion>1.6.6</slf4jVersion>
       <jacksonVersion>1.9.2</jacksonVersion>
       <spring.version>4.0.2.RELEASE</spring.version>
-      <servelt.version>2.5</servelt.version>
+      <servelt.version>3.1.0</servelt.version>
       <commons-logging.version>1.1.1</commons-logging.version>
       <slf4jVersion>1.6.6</slf4jVersion>
       <log4jVersion>1.2.17</log4jVersion>
+      <jetty.version>9.0.7.v20131107</jetty.version>
+      <jetty.jsp.version>9.0.7.v20131107</jetty.jsp.version>
   </properties>
   
   <developers>
@@ -71,6 +73,13 @@
         <version>${spring.version}</version>
     </dependency>
     
+    <!-- org.springframework.oxm.UnmarshallingFailureException -->
+    <dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-oxm</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+    
     <!-- Spring MVC -->
     <dependency>
         <groupId>org.springframework</groupId>
@@ -95,13 +104,6 @@
 	    <version>1.4</version>
      </dependency>
         
-     <!-- javax.servelt.HttpServletRequest -->
-     <dependency>
-         <groupId>javax.servlet</groupId>
-         <artifactId>servlet-api</artifactId>
-         <version>${servelt.version}</version>
-     </dependency>
-     
      <dependency>
         <groupId>log4j</groupId>
         <artifactId>log4j</artifactId>
@@ -138,6 +140,13 @@
 			<version>2.4</version>
 	</dependency>
 	
+	<!-- javax.servelt.HttpServletRequest -->
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>${servelt.version}</version>
+	</dependency> 
+	
   </dependencies>
   
    <build>
@@ -154,6 +163,13 @@
                     <target>${javaVersion}</target>
                 </configuration>
             </plugin>
+            
+            <plugin> 
+     		 	<artifactId>maven-eclipse-plugin</artifactId> 
+      			<configuration> 
+        			<downloadSources>true</downloadSources>
+      			</configuration> 
+    		</plugin> 
         </plugins>
     </build>
   <modules>
@@ -202,7 +218,12 @@
             <snapshots>  
                 <enabled>false</enabled>  
             </snapshots>  
-        </repository>  
+        </repository>
+         <repository>
+			<id>springsource-repo</id>
+			<name>SpringSource Repository</name>
+			<url>http://repo.springsource.org/release</url>
+		</repository>  
     </repositories>  
     
   
