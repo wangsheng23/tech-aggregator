@@ -16,10 +16,19 @@ import org.apache.commons.lang.StringUtils;
 public class DateUtils {
 
     public static final String 	MIDDLE_LINE_TIMESTAMP 			= "yyyy-MM-dd HH:mm:ss";
-    public static final String  MIDDLE_LINE_TIME_ZONE_TIMESTAMP = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"; // Z : zone T: customized character, meaningless
+    
+    // Z : zone T: customized character, meaningless
+    public static final String  MIDDLE_LINE_TIME_ZONE_TIMESTAMP = "yyyy-MM-dd'T'HH:mm:ssZ"; 
+    
+    // Z : zone T: customized character, meaningless
+    public static final String  MIDDLE_LINE_DETAIL_TIME_ZONE_TIMESTAMP = "yyyy-MM-dd'T'HH:mm:SSSZ"; 
+    
+    // Z  and T are customized characters, meaningless
+    // Solr Date query needs this kind of format : T and Z
+    public static final String  MIDDLE_LINE_CUSTOMIZED_TIMESTAMP = "yyyy-MM-dd'T'HH:mm:ss'Z'"; 
     
     
-    private static final long 	ONE_DAY 			  = 24 * 3600 * 1000L;
+    private static final long 	ONE_DAY 			  			= 24 * 3600 * 1000L;
     private static long 		current_time;
 
     /**
@@ -33,7 +42,7 @@ public class DateUtils {
     }
 
     /**
-     * This method uesd to handle the special case which cross months. ie.
+     * This method used to handle the special case which cross months. ie.
      * <p/>
      * Getting the data from CMS in the time(2013/8/31 23:55:00), and the request may
      * be completed in 2013/09/01, and we will get the data from CMS using 2013/09/01 as the endtime,
@@ -222,4 +231,24 @@ public class DateUtils {
     	Date date = str2Date(timeStamp, MIDDLE_LINE_TIMESTAMP);
     	return calendar.getTimeInMillis() > date.getTime();
     }
+    
+    // Append T(Customized character and Zone), especially for Solr Date query
+    // http://blog.csdn.net/wangshfa/article/details/36367715
+    public static String format(Date date, String format) {
+    	DateFormat dateFormat = new SimpleDateFormat(format);
+    	String result = "2015-01-01T00:00:00Z";
+		try {
+			result = dateFormat.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	return result;
+    }
+    
+    public static void main(String[] args) {
+		Calendar calendar = Calendar.getInstance();
+		System.out.println(calendar.getTime());
+		System.out.println(format(calendar.getTime(), MIDDLE_LINE_TIME_ZONE_TIMESTAMP));
+	}
 }

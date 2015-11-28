@@ -21,6 +21,11 @@ public class SolrClientBuilder {
 	
 	private SolrClientBuilder() {}
 	
+	/*static {// we have to make sure these core available under current env.
+		messageSearchClient 	= new HttpSolrClient(getSolrActionUrl(SolrCore.Message));
+		fileImageSearchClient 	= new HttpSolrClient(getSolrActionUrl(SolrCore.FileImage));
+	}*/
+	
 	public static synchronized SolrClient getSolrClinetInstance(SolrCore core) {
 		SolrClient targetSolrClient = null;
 		switch (core) {

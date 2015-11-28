@@ -7,20 +7,17 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrQuery.ORDER;
-import org.apache.solr.client.solrj.response.FacetField;
-import org.apache.solr.client.solrj.response.FacetField.Count;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.wsheng.aggregator.solr.bean.SolrBizField;
@@ -51,13 +48,14 @@ import com.wsheng.aggregator.util.SolrUtils;
  */
 public class TestSolrActionProxy extends Assert   {
 
-	private SolrActionProxy solrActionProxy;
+	private static SolrActionProxy solrActionProxy;
 	
 	
-	@Before
-	public void init() {
+	@BeforeClass
+	public static void init() {
 		// solrActionProxy = new SolrActionProxy(SolrCore.FileImage);
-		solrActionProxy = new SolrActionProxy("http://192.168.1.157:8983/solr/universal");
+		// solrActionProxy = new SolrActionProxy("http://192.168.1.157:8983/solr/universal");
+		solrActionProxy = new SolrActionProxy("http://192.168.1.157:8080/solr/circle");
 	}
 	
 	@Test
@@ -117,9 +115,19 @@ public class TestSolrActionProxy extends Assert   {
 		
 	}
 	
+	/**
+	 * 1. 在外围点击“Return Test" 可以测试成功，而这个地方点
+	 * “Run As Junit Test”不能成功。
+	 * 
+	 * 2. 不能连接外围的VPN，否则会打Connection Refused
+	 * （所以 ： “Run As Junit Test”不能成功 也是Connection Refused ?）
+	 * 
+	 * 配置成功log4j.properteis后可以看到相应的Exception？可以使用c11seracher来做测试。
+	 * 
+	 */
 	@Test
 	public void queryById() {
-		String query = "id:6";
+		String query = "id:10684";
 		SolrDocumentList docs = solrActionProxy.query(query).getResults();
 		System.out.println("Number: " + " --- " + docs.getNumFound());
 		for (SolrDocument doc : docs) {
@@ -244,6 +252,10 @@ public class TestSolrActionProxy extends Assert   {
 		// dateValues1.add("2015-11-09T07:23:23Z");
 		dateValues1.add("");
 		dateValues1.add("");
+		
+		// http://blog.csdn.net/wangshfa/article/details/36367715
+		// Spring provide the function to convert str to date 
+		
 		
 		SolrQueryField<String> dateField = new SolrQueryField<String>(SolrBizField.last_update_time.name(), dateValues1, false, 
 				false, true, ORDER.desc, SolrQueryFieldType.Date_Range, SolrQueryField.SolrQueryFieldOperator.OR); 

@@ -4,8 +4,6 @@
 package com.wsheng.aggregator.solr;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -53,6 +51,8 @@ public class SolrActionProxy {
 	
 	public SolrActionProxy(String baseURL) {
 		solrClient = new HttpSolrClient(baseURL);
+		System.out.println(" solr client : " + solrClient.hashCode());
+		System.out.println(" solr client : " + solrClient.toString());
 	}
 
 	/**
@@ -155,6 +155,8 @@ public class SolrActionProxy {
 				facetFields.add(field.getFieldName());
 		}
 	
+		System.out.println("==================== queryStr " + queryStr);
+		
 		SolrQuery query = new SolrQuery(queryStr);
 		for (Map.Entry<String, ORDER> sortField : orderFields.entrySet()) {
 			query.addSort(sortField.getKey(), sortField.getValue());
@@ -279,23 +281,29 @@ public class SolrActionProxy {
 	public void releaseResource() {
 		if (solrClient != null) {
 			try {
+				System.out.println(" start to releae solr Client : " + solrClient.hashCode());
 				solrClient.close();
 			} catch (IOException e) {
 				LoggerUtils.error(logger, "Close Solr Client failed : "  + ExceptionUtils.getStackTraceMsg(e));
 			}
+			
+			System.out.println(" End to releae solr Client : " + solrClient.hashCode());
 		}
 	}
 	
 	private List<QueryResponse> paginationQuery(SolrQuery query, int pageSize) {
 		List<QueryResponse> responses = new ArrayList<>();
 		
+		System.out.println(" =========== Start pagination");
 		SolrQueryPagination page = new SolrQueryPagination(pageSize);
+		System.out.println(" =========== End pagination");
 		
 		boolean quit = false;
 		boolean needScroll = true;
 		do {
 			int start = page.getStart();
-			
+			System.out.println(" =========== Start : " + start );
+			System.out.println(" =========== pageSize : " + pageSize );
 			// Pagination or not
 			if (start != -1 && pageSize != -1) {
 				query.setStart(start);
@@ -306,9 +314,11 @@ public class SolrActionProxy {
 				quit = true;
 			}
 			
-			LoggerUtils.info(logger, " Current Pagination Query is : " + CommonUtils.decode(query.toString()));
-
 			try {
+				// Solr 5.3.1 Bug ? SolrClient 连接会断掉，即使是新创建的solrClient，也会出现搜索不出内容的情况
+				// 解决方案是调用一次ping，即solrClient.ping()，建议，在身产环境中升级到更新的Solr，如果有该问题出现时，再打开ping
+				// System.err.println(" ping able : " +  solrClient.ping());
+				// 参看TestSolrActionProxy中的内容，貌似是2个原因，1是执行Test的地方，2是VPN
 				QueryResponse response = solrClient.query(query);
 				responses.add(response);
 				
@@ -327,12 +337,8 @@ public class SolrActionProxy {
 	
 	private void logQuery(SolrQuery query) {
 		if (query != null) {
-			try {
-				LoggerUtils.info(logger, "Current Query : " + URLDecoder.decode(query.toString(), "UTF-8"));
-				System.out.println(" Current Query : " + URLDecoder.decode(query.toString(), "UTF-8"));
-			} catch (UnsupportedEncodingException e) {
-				LoggerUtils.error(logger, "Query conents is so bad : "  + ExceptionUtils.getStackTraceMsg(e));
-			}	
+			LoggerUtils.info(logger, "Current Query : " + CommonUtils.decode(query.toString()));
+			System.out.println(" Current Query : " + CommonUtils.decode(query.toString()));
 		}
 	}
 	
