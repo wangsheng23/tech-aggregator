@@ -44,7 +44,7 @@ public class TestEmailUtil {
 		List<String> signatures = new ArrayList<String>();
 		signatures.add("This mail is sent from db in a box tool");
 		signatures.add("it's still in test");
-		signatures.add("access: http://dbinabox.vip.ebay.com/ for the tool");
+		signatures.add("access: http://dbinabox.vip.ybei.com/ for the tool");
 		
 		contents.put(MailConstants.SIGNATURES, signatures);
 		contents.put(MailConstants.HAS_SIGNATURE, true);

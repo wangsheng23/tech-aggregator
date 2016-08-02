@@ -40,7 +40,7 @@ public class HttpUtils {
         /*
          * To resolve the exception:
 		 *  A message body writer for Java type,
-		 *  class com.ebay.montage.pm.model.NucleonRule,
+		 *  class com.ybei.montage.pm.model.NucleonRule,
 		 *  and MIME media type, application/json, was not found
 		 */
         DefaultClientConfig defaultClientConfig = new DefaultClientConfig();

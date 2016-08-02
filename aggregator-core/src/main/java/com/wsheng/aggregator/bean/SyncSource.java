@@ -31,7 +31,7 @@ public class SyncSource implements Serializable {
 	 * cms-auth.properties
 	 * 
 	 * #type 	| user name		| token
-	 * lbsync=_LBSYNC_READWRITE:ebay@2013
+	 * lbsync=_LBSYNC_READWRITE:Ybei@2013
 	 * 
 	 * We only have LB sync currently
 	 */

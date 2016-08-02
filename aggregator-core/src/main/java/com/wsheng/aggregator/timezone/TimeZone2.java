@@ -10,7 +10,7 @@ import java.util.TimeZone;
 /**
  * @author Josh Wang(Sheng)
  * 
- * @email  swang6@ebay.com
+ * @email  swang6@ybei.com
  * 
  */
 public class TimeZone2 {

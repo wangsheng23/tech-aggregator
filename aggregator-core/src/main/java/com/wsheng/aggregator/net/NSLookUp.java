@@ -41,7 +41,7 @@ public class NSLookUp {
 	
 	public static void main(String[] args) {
 		System.out.println(forwardLookUp("10.89.68.39"));
-		System.out.println(reverseLookUp("slcdb2167.slc.ebay.com"));
+		System.out.println(reverseLookUp("slcdb2167.slc.ybei.com"));
 	}
 
 }

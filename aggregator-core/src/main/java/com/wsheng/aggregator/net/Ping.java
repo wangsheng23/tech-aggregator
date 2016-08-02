@@ -31,7 +31,7 @@ public class Ping {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(pingable("tmrslc.vip.ebay.com"));
+		System.out.println(pingable("tmrslc.vip.ybei.com"));
 		System.out.println(pingable("D-SHC-00802132"));
 		System.out.println(pingable("10.249.65.147"));
 	}

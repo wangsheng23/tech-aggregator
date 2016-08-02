@@ -34,7 +34,7 @@ public class EmailUtils {
 			String receivers, String sender) throws EmailException {
 		HtmlEmail email = new HtmlEmail();
 		email.setSSLOnConnect(false);
-		String smtpHost = "atom.corp.ebay.com";
+		String smtpHost = "atom.corp.ybei.com";
 		// LoggerUtil.info(logger, "Current smtpHost is: " + smtpHost);
 		
 		email.setHostName(smtpHost);

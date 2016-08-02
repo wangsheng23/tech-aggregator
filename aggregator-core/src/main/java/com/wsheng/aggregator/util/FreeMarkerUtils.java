@@ -36,7 +36,7 @@ public class FreeMarkerUtils {
 			/*  This one is valid both in tomcat and junit test */
 //			cfg = new Configuration(new Version("2.3"));
 //			URL websrc = FreeMarkerUtils.class.getClassLoader().getResource("/");
-//			String classPathPrefix = "com/ebay/spi/templates/";
+//			String classPathPrefix = "com/ybei/spi/templates/";
 //			if (websrc == null) {
 //				templatePath = System.getProperty("user.dir") + "/src/" + classPathPrefix;
 //			} else {
